@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SubmitController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/form', [SubmitController::class, 'index']);
+Route::post('/submit', [SubmitController::class, 'store'])->name('submission');
+Route::get('/salon', [SubmitController::class, 'salon']);
+
+Route::get('tasks', [TaskController::class, 'index'])->name('tasks');
+Route::get('tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('tasks', [TaskController::class, 'store'])->name('tasks.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
